@@ -39,8 +39,8 @@ public class GeoDaoImpl implements GeoDao {
     }
 
     @Override
-    public void create(Geotest t) {
-        sessionFactory.getCurrentSession().save(t);
+    public int create(Geotest t) {
+        return (int) sessionFactory.getCurrentSession().save(t);
     }
 
     @Override

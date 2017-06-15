@@ -35,8 +35,8 @@ public class CachelogDaoImpl implements CachelogDao{
     }
 
     @Override
-    public void create(Cachelog t) {
-        session.save(t);
+    public int create(Cachelog t) {
+        return (int) session.save(t);
     }
 
     @Override

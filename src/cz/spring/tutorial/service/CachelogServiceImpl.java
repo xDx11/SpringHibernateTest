@@ -28,8 +28,8 @@ public class CachelogServiceImpl implements CachelogService{
     }
 
     @Override
-    public void create(Cachelog t) {
-        cachelogDao.create(t);
+    public int create(Cachelog t) {
+        return cachelogDao.create(t);
     }
 
     @Override

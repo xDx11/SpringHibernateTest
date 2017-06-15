@@ -22,8 +22,8 @@ public class GeocacheServiceImpl implements GeocacheService{
     private GeocacheDao geocacheDao; 
 
     @Override
-    public void addGeoObject(Geocache object) {
-        geocacheDao.create(object);
+    public int addGeoObject(Geocache object) {
+        return geocacheDao.create(object);
     }
 
     @Override

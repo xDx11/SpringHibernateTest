@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface GeocacheService {
     
-    public void addGeoObject(Geocache object);
+    public int addGeoObject(Geocache object);
 
     public void updateGeotestObject(Geocache object);
 

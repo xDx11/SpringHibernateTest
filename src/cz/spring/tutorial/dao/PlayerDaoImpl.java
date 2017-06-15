@@ -36,8 +36,8 @@ public class PlayerDaoImpl implements PlayerDao {
     }
 
     @Override
-    public void create(Player t) {
-        session.save(t);
+    public int create(Player t) {
+        return (int) session.save(t);
     }
 
     @Override

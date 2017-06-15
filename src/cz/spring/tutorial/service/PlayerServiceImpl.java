@@ -28,8 +28,8 @@ public class PlayerServiceImpl implements PlayerService{
     }
 
     @Override
-    public void create(Player t) {
-        playerDao.create(t);
+    public int create(Player t) {
+        return playerDao.create(t);
     }
 
     @Override

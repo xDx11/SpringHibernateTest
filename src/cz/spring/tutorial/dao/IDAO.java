@@ -16,7 +16,7 @@ public interface IDAO<T> {
 
     T get(int id);
 
-    void create(T t);
+    int create(T t);
 
     void update(T t);
 

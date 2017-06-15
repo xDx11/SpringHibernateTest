@@ -5,11 +5,16 @@
  */
 package cz.spring.tutorial.dao;
 
+import cz.spring.tutorial.model.Cachelog;
 import cz.spring.tutorial.model.Geocache;
+import cz.spring.tutorial.util.SizeOrder;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,14 +42,13 @@ public class GeocacheDaoImpl implements GeocacheDao{
     }
 
     @Override
-    public void create(Geocache t) {
-        Session session = sessionFactory.openSession();       
-        session.save(t);
+    public int create(Geocache t) {
+        return (int) session.save(t);
     }
 
     @Override
     public void update(Geocache t) {
-        Session session = sessionFactory.openSession();       
+        
         session.update(t);
     }
 
@@ -62,7 +66,75 @@ public class GeocacheDaoImpl implements GeocacheDao{
 
     @Override
     public List<Geocache> list(Criteria crit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (List<Geocache>) crit.list();
     }
+
+    @Override
+    public List<Geocache> getCachesByType(String type) {
+        Criteria crit = session.createCriteria(Geocache.class);
+        switch(type){
+            case "mystery":
+                crit.add(Restrictions.like("type", "%mystery%"));
+                break;
+            case "multi":
+                crit.add(Restrictions.like("type", "%multi%"));
+                break;
+            case "earth":
+                crit.add(Restrictions.like("type", "%earth%"));
+                break;
+            default:
+                crit.add(Restrictions.like("type", "%tradition%"));
+                break;
+        }
+        return (List<Geocache>) crit.list();
+    }
+
+    @Override
+    public List<Geocache> getCachesBySize(String size, String typeEqualGreatLess) {
+        Criteria crit = session.createCriteria(Geocache.class);
+        switch(typeEqualGreatLess){
+            case "equal":
+                crit.add(Restrictions.eq("size", size));
+                break;
+            case "greater":
+                crit.add(Restrictions.gt("size", size));
+                break;
+            case "less":
+                crit.add(Restrictions.lt("size", size));
+                break;
+            default:
+                crit.add(Restrictions.eq("size", size));
+                break;
+        }
+        return (List<Geocache>) crit.list();
+    }
+
+    @Override
+    public List<Geocache> getCachesWithMostLogs() {
+        Criteria critGeocache = session.createCriteria(Geocache.class);
+        critGeocache.addOrder(SizeOrder.desc("logs"));
+        critGeocache.setMaxResults(10);
+        
+        return (List<Geocache>) critGeocache.list();
+        //Criteria critCachelog = session.createCriteria(Cachelog.class);
+        
+    }
+
+    @Override
+    public List<Geocache> getCachesByName(String name) {
+        Criteria crit = session.createCriteria(Geocache.class);
+        crit.add(Restrictions.like("name", "%"+name+"%"));
+        return (List<Geocache>) crit.list();
+    }
+
+    @Override
+    public double getAvfCachesDiff() {
+        Criteria crit = session.createCriteria(Geocache.class);
+        crit.setProjection(Projections.avg("diff"));
+        List result = crit.list();
+        return (double) result.get(0);
+    }
+    
+    
     
 }
