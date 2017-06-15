@@ -5,7 +5,7 @@
 
 <t:template>
 	<jsp:attribute name="header">      				
-		<title>Weather App</title>
+		<title>SpringHibernateTest App</title>
     </jsp:attribute>
 
 	<jsp:attribute name="footer">
@@ -31,16 +31,6 @@
 			
 			<hr>
 			
-			<div style="text-align:center">
-				<h2>
-					Weather app for OpenWeatherMap API<br> <br>
-				</h2>
-				<h3>
-					<a href="<c:url value="/weather"/>">Click here to go OpenWeatherMap API APP </a>
-					
-				</h3>
-				<br>
-				
-			</div>
+			
     </jsp:body>
 </t:template>
