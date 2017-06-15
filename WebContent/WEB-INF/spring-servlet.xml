@@ -35,18 +35,20 @@
 
         <bean id="mysessionFactory"  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">  
             <property name="dataSource" ref="dataSource"></property>                
-            <!--
+            
             <property name="packagesToScan">
             <list>
                 <value>cz.spring.tutorial.model</value>
             </list>            
-            -->
+            
+            <!--
             <property name="mappingResources">
             <list>
             <value>/resources/mapping/Player.hbm.xml </value>
             <value>/resources/mapping/Geocache.hbm.xml </value>
             <value>/resources/mapping/Cachelog.hbm.xml </value>
             </list>
+            -->
         </property>
             <property name="hibernateProperties">  
                 <props>  

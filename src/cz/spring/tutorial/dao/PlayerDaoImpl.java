@@ -75,10 +75,10 @@ public class PlayerDaoImpl implements PlayerDao {
         Criteria crit = session.createCriteria(Player.class);
         switch(type.toLowerCase()){
             case "premium":
-                crit.add(Restrictions.like("type", "%premium%"));
+                crit.add(Restrictions.like("member", "%premium%"));
                 break;
             default:
-                crit.add(Restrictions.like("type", "%basic%"));
+                crit.add(Restrictions.like("member", "%basic%"));
                 break;
         }
         return list(crit);
@@ -88,14 +88,14 @@ public class PlayerDaoImpl implements PlayerDao {
     public List<Player> getPlayersWithMostLogs() {
         Criteria crit = session.createCriteria(Player.class);
         crit.addOrder(SizeOrder.desc("logs"));
-        crit.setMaxResults(10);
+        crit.setMaxResults(2);
         return list(crit);
     }
 
     @Override
     public List<Player> getPlayersByName(String name) {
         Criteria crit = session.createCriteria(Player.class);
-        crit.add(Restrictions.like("name", "%"+name+"%"));
+        crit.add(Restrictions.like("nick", "%"+name+"%"));
         return list(crit);
     }
     

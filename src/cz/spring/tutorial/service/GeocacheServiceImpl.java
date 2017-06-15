@@ -52,7 +52,7 @@ public class GeocacheServiceImpl implements GeocacheService{
     }
 
     @Override
-    public List<Geocache> getCachesBySize(String size, String typeEqualGreatLess) {
+    public List<Geocache> getCachesBySize(Double size, String typeEqualGreatLess) {
         return geocacheDao.getCachesBySize(size, typeEqualGreatLess);
     }
 

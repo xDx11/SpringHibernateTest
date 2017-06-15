@@ -2,3 +2,4 @@ cz.spring.tutorial.controller
 cz.spring.tutorial.dao
 cz.spring.tutorial.model
 cz.spring.tutorial.service
+cz.spring.tutorial.util

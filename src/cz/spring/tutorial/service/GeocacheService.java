@@ -25,7 +25,7 @@ public interface GeocacheService {
     public List<Geocache> getGeoList();
     
     public List<Geocache> getCachesByType(String type);
-    public List<Geocache> getCachesBySize(String size, String typeEqualGreatLess);
+    public List<Geocache> getCachesBySize(Double size, String typeEqualGreatLess);
     public List<Geocache> getCachesWithMostLogs();
     public List<Geocache> getCachesByName(String name);
     public double getAvfCachesDiff();

@@ -90,7 +90,7 @@ public class GeocacheDaoImpl implements GeocacheDao{
     }
 
     @Override
-    public List<Geocache> getCachesBySize(String size, String typeEqualGreatLess) {
+    public List<Geocache> getCachesBySize(Double size, String typeEqualGreatLess) {
         Criteria crit = session.createCriteria(Geocache.class);
         switch(typeEqualGreatLess.toLowerCase()){
             case "equal":
