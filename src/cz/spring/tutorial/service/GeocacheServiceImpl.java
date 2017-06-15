@@ -45,5 +45,32 @@ public class GeocacheServiceImpl implements GeocacheService{
     public List<Geocache> getGeoList() {
         return geocacheDao.getAll();
     }
+
+    @Override
+    public List<Geocache> getCachesByType(String type) {
+        return geocacheDao.getCachesByType(type);
+    }
+
+    @Override
+    public List<Geocache> getCachesBySize(String size, String typeEqualGreatLess) {
+        return geocacheDao.getCachesBySize(size, typeEqualGreatLess);
+    }
+
+    @Override
+    public List<Geocache> getCachesWithMostLogs() {
+        return geocacheDao.getCachesWithMostLogs();
+    }
+
+    @Override
+    public List<Geocache> getCachesByName(String name) {
+        return geocacheDao.getCachesByName(name);
+    }
+
+    @Override
+    public double getAvfCachesDiff() {
+        return geocacheDao.getAvfCachesDiff();
+    }
+    
+    
     
 }

@@ -51,5 +51,22 @@ public class PlayerServiceImpl implements PlayerService{
     public List<Player> list(Criteria crit) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Player> getPlayersByType(String type) {
+        return playerDao.getPlayersByType(type);
+    }
+
+    @Override
+    public List<Player> getPlayersWithMostLogs() {
+        return playerDao.getPlayersWithMostLogs();
+    }
+
+    @Override
+    public List<Player> getPlayersByName(String name) {
+        return playerDao.getPlayersByName(name);
+    }
+    
+    
     
 }

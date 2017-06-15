@@ -6,11 +6,14 @@
 package cz.spring.tutorial.service;
 
 import cz.spring.tutorial.model.Player;
+import java.util.List;
 
 /**
  *
  * @author Radek Soucek
  */
 public interface PlayerService extends IService<Player>{
-    
+    public List<Player> getPlayersByType(String type);
+    public List<Player> getPlayersWithMostLogs();
+    public List<Player> getPlayersByName(String name);
 }

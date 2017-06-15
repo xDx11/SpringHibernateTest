@@ -6,10 +6,12 @@
 package cz.spring.tutorial.dao;
 
 import cz.spring.tutorial.model.Player;
+import cz.spring.tutorial.util.SizeOrder;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,7 +67,37 @@ public class PlayerDaoImpl implements PlayerDao {
 
     @Override
     public List<Player> list(Criteria crit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (List<Player>) crit.list();
     }
+
+    @Override
+    public List<Player> getPlayersByType(String type) {
+        Criteria crit = session.createCriteria(Player.class);
+        switch(type.toLowerCase()){
+            case "premium":
+                crit.add(Restrictions.like("type", "%premium%"));
+                break;
+            default:
+                crit.add(Restrictions.like("type", "%basic%"));
+                break;
+        }
+        return list(crit);
+    }
+
+    @Override
+    public List<Player> getPlayersWithMostLogs() {
+        Criteria crit = session.createCriteria(Player.class);
+        crit.addOrder(SizeOrder.desc("logs"));
+        crit.setMaxResults(10);
+        return list(crit);
+    }
+
+    @Override
+    public List<Player> getPlayersByName(String name) {
+        Criteria crit = session.createCriteria(Player.class);
+        crit.add(Restrictions.like("name", "%"+name+"%"));
+        return list(crit);
+    }
+    
     
 }

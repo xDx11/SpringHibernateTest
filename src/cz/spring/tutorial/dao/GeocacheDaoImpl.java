@@ -72,7 +72,7 @@ public class GeocacheDaoImpl implements GeocacheDao{
     @Override
     public List<Geocache> getCachesByType(String type) {
         Criteria crit = session.createCriteria(Geocache.class);
-        switch(type){
+        switch(type.toLowerCase()){
             case "mystery":
                 crit.add(Restrictions.like("type", "%mystery%"));
                 break;
@@ -92,7 +92,7 @@ public class GeocacheDaoImpl implements GeocacheDao{
     @Override
     public List<Geocache> getCachesBySize(String size, String typeEqualGreatLess) {
         Criteria crit = session.createCriteria(Geocache.class);
-        switch(typeEqualGreatLess){
+        switch(typeEqualGreatLess.toLowerCase()){
             case "equal":
                 crit.add(Restrictions.eq("size", size));
                 break;

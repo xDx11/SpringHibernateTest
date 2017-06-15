@@ -6,11 +6,15 @@
 package cz.spring.tutorial.dao;
 
 import cz.spring.tutorial.model.Player;
+import java.util.List;
 
 /**
  *
  * @author Radek Soucek
  */
 public interface PlayerDao extends IDAO<Player>{
+    public List<Player> getPlayersByType(String type);
+    public List<Player> getPlayersWithMostLogs();
+    public List<Player> getPlayersByName(String name);
     
 }
