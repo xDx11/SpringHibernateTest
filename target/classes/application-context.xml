@@ -1,17 +1,25 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+        xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc 
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
-        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+        http://www.springframework.org/schema/context         
         http://www.springframework.org/schema/context/spring-context.xsd">
  
  	<context:annotation-config /> 	
  	<mvc:annotation-driven />
- 	<mvc:resources mapping="/resources/**" location="/resources/" />
+        
+        <!-- Sets annotation-driven transactions -->
+        <tx:annotation-driven transaction-manager="transactionManager"/>
+ 	
+        <mvc:resources mapping="/resources/**" location="/resources/" />
 	<context:component-scan base-package="cz.spring.tutorial.controller" />
 	<context:component-scan base-package="cz.spring.tutorial.WeatherLogic"/>
 	<context:component-scan base-package="cz.spring.tutorial.dao"/>
@@ -23,6 +31,7 @@
             <property name="url" value="jdbc:mysql://localhost:3306/hibtest"></property>  
             <property name="username" value="root"></property>  
             <property name="password" value="testpass"></property>  
+            <property name="defaultAutoCommit" value="false" />            
         </bean>  
 
         <bean id="mySessionFactory"  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">  
@@ -48,14 +57,20 @@
                     <prop key="hibernate.hbm2ddl.auto">update</prop>  
                     <prop key="hibernate.show_sql">true</prop>  
                     <prop key="hibernate.current_session_context_class">thread</prop>
+                    <prop key="hibernate.connection.autocommit">true</prop>
 
                 </props>  
             </property>  
         </bean>                               
-        
+        <!--
         <bean id="transactionManager"
             class="org.springframework.orm.hibernate4.HibernateTransactionManager">
             <property name="sessionFactory" ref="mySessionFactory" />
+        </bean>
+        -->
+        <bean id="transactionManager"
+                class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+            <property name="sessionFactory" ref="mySessionFactory"/>
         </bean>
         
         <bean id="geocacheDao" class="cz.spring.tutorial.dao.GeocacheDaoImpl">

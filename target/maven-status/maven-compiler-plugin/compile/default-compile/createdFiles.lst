@@ -18,6 +18,7 @@ cz\spring\tutorial\service\CachelogServiceImpl.class
 cz\spring\tutorial\dao\GeocacheDao.class
 cz\spring\tutorial\model\Cachelog.class
 cz\spring\tutorial\service\IService.class
+test\java\cz\spring\tutorial\dao\GeocacheDaoImplTest.class
 cz\spring\tutorial\service\GeocacheService.class
 cz\spring\tutorial\service\GeoServiceImpl.class
 cz\spring\tutorial\model\Geocache.class

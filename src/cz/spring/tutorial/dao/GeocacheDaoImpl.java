@@ -19,6 +19,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -43,14 +44,13 @@ public class GeocacheDaoImpl implements GeocacheDao{
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.mySessionFactory = sessionFactory;
         this.session = sessionFactory.openSession();
-    }        
-
+    }  
 
     @Override
     public Geocache get(int id) {
         //Session session = mySessionFactory.openSession();       
         //Geocache geocache = (Geocache) session.load(Geocache.class, id);        
-        Geocache geocache = (Geocache) mySessionFactory.openSession().load(Geocache.class, id);        
+        Geocache geocache = (Geocache) session.get(Geocache.class, id);        
         return geocache;     
     }
 
@@ -74,13 +74,13 @@ public class GeocacheDaoImpl implements GeocacheDao{
 
     @Override
     public void update(Geocache t) {
-        
+        //Session session2 = mySessionFactory.getCurrentSession();
         session.update(t);
     }
 
     @Override
     public void delete(Geocache t) {
-        Session session = mySessionFactory.openSession();       
+        //Session session2 = mySessionFactory.getCurrentSession();
         session.delete(t);
     }
 

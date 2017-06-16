@@ -23,3 +23,4 @@ C:\NetbeansProjects\SpringHibTest\src\cz\spring\tutorial\service\IService.java
 C:\NetbeansProjects\SpringHibTest\src\cz\spring\tutorial\service\GeocacheService.java
 C:\NetbeansProjects\SpringHibTest\src\cz\spring\tutorial\service\CachelogServiceImpl.java
 C:\NetbeansProjects\SpringHibTest\src\cz\spring\tutorial\dao\CachelogDaoImpl.java
+C:\NetbeansProjects\SpringHibTest\src\test\java\cz\spring\tutorial\dao\GeocacheDaoImplTest.java
