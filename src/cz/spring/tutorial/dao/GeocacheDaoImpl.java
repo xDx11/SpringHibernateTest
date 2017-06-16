@@ -12,38 +12,64 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Radek Soucek
  */
-@Service
+@Component
 public class GeocacheDaoImpl implements GeocacheDao{
-    
-    @Autowired
-    private SessionFactory sessionFactory;
-    private Session session;
+        
+    private SessionFactory mySessionFactory;
+    private Session session;       
+        
+    public GeocacheDaoImpl(){
+        
+    }
     
     public GeocacheDaoImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+        this.mySessionFactory = sessionFactory;
         this.session = sessionFactory.openSession();
     }
 
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.mySessionFactory = sessionFactory;
+        this.session = sessionFactory.openSession();
+    }        
+
+
     @Override
     public Geocache get(int id) {
-        //Session session = sessionFactory.openSession();       
-        Geocache geocache = (Geocache) session.load(Geocache.class, id);        
+        //Session session = mySessionFactory.openSession();       
+        //Geocache geocache = (Geocache) session.load(Geocache.class, id);        
+        Geocache geocache = (Geocache) mySessionFactory.openSession().load(Geocache.class, id);        
         return geocache;     
     }
 
     @Override
     public int create(Geocache t) {
-        return (int) session.save(t);
+        int i = (int) session.save(t);        
+        return i;
+        /*
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            int i = (int) session.save(t);
+            tx.commit();
+            return i;
+        } catch (Exception e) {
+            if(tx != null) tx.rollback();
+            throw e;
+        }
+        */             
     }
 
     @Override
@@ -54,13 +80,13 @@ public class GeocacheDaoImpl implements GeocacheDao{
 
     @Override
     public void delete(Geocache t) {
-        Session session = sessionFactory.openSession();       
+        Session session = mySessionFactory.openSession();       
         session.delete(t);
     }
 
     @Override
     public List<Geocache> getAll() {
-        //Session session = sessionFactory.openSession();       
+        //Session session = mySessionFactory.openSession();       
         return (List<Geocache>) session.createQuery("from Geocache").list();
     }
 

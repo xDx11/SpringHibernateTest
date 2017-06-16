@@ -7,6 +7,7 @@ package cz.spring.tutorial.dao;
 
 import cz.spring.tutorial.model.Geocache;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  *

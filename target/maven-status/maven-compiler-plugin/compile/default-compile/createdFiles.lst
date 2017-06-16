@@ -1,5 +1,6 @@
 cz\spring\tutorial\dao\PlayerDao.class
 cz\spring\tutorial\dao\IDAO.class
+test\java\cz\spring\tutorial\service\GeocacheServiceImplTest.class
 cz\spring\tutorial\service\PlayerService.class
 cz\spring\tutorial\dao\CachelogDaoImpl.class
 cz\spring\tutorial\dao\GeocacheDaoImpl.class

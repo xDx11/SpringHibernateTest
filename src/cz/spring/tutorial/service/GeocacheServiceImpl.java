@@ -18,8 +18,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class GeocacheServiceImpl implements GeocacheService{
     
-    @Autowired
     private GeocacheDao geocacheDao; 
+    
+    public GeocacheServiceImpl(){
+        
+    }
+    
+    @Autowired
+    public GeocacheServiceImpl(GeocacheDao geocacheDao) {
+        this.geocacheDao = geocacheDao;
+    }        
+
+    @Autowired
+    public void setGeocacheDao(GeocacheDao geocacheDao) {
+        this.geocacheDao = geocacheDao;
+    }
+    
+    
 
     @Override
     public int addGeoObject(Geocache object) {

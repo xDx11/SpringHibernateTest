@@ -41,12 +41,15 @@ public class HomeController {
     public ModelAndView home() {
         ModelAndView model = new ModelAndView("home");
         System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST_____________________");
-        //Geotest geo = geoService.getGeoObject(1);
-        //System.out.println(geo.getId());
-        //System.out.println(geo.getTitle());
-        //System.out.println(geo.getAuthor());                                                
-
-        testPlayerCriteria();
+        
+        //testPlayerCriteria();
+        
+        Geocache geocache = new Geocache();
+        geocache.setName("TestName");
+        geocache.setCode("GC12345");
+        System.out.println(geocache.getName());
+        int id = geocacheService.addGeoObject(geocache);        
+        System.out.println("id: " + id);
         
         return model;
     }
